@@ -43,6 +43,7 @@ body {
 
 .question {
   margin-bottom: 20px;
+  padding-bottom: 20px; /* Add extra padding at the bottom of each question */
 }
 
 .question h4 {

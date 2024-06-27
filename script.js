@@ -68,11 +68,12 @@ document.addEventListener('DOMContentLoaded', function () {
             showResults();
             return;
         }
-        const currentSubject = subjectSelect.value;
-        const questions = quizData[currentSubject];
-        const allAnswered = questions.every((question, index) => selectedAnswers[currentSubject] && selectedAnswers[currentSubject][index] !== undefined);
-        if (!allAnswered) {
-            alert("Please answer all questions before submitting.");
+        const allSubjectsAnswered = Object.keys(quizData).every(subject => {
+            const questions = quizData[subject];
+            return questions.every((question, index) => selectedAnswers[subject] && selectedAnswers[subject][index] !== undefined);
+        });
+        if (!allSubjectsAnswered) {
+            alert("Please answer all questions in all sections before submitting.");
             return;
         }
         submitted = true;
@@ -102,7 +103,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 const userAnswer = selectedAnswers[subject] ? selectedAnswers[subject][index] : null;
                 const correctAnswer = question.answer;
                 const isCorrect = userAnswer === correctAnswer;
-                const resultText = isCorrect ? 'Correct' : `Incorrect (Correct answer: ${correctAnswer})`;
+                const resultText = isCorrect ? 'Correct' : `Incorrect (Correct answer: ${correctAnswer}. ${question.options[correctAnswer]})`;
 
                 const questionResultDiv = document.createElement('div');
                 questionResultDiv.classList.add('question-result');
@@ -143,6 +144,7 @@ document.addEventListener('DOMContentLoaded', function () {
             });
         });
 
+        resultContainer.style.display = 'block';
         timeRemaining = 0; // Stop the timer
         saveState();
     }
