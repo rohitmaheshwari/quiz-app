@@ -3,7 +3,10 @@ document.addEventListener('DOMContentLoaded', function () {
     const resultContainer = document.getElementById('resultContainer');
     const subjectSelect = document.getElementById('subjectSelect');
     const submitButton = document.getElementById('submitButton');
+    const startButton = document.getElementById('startButton');
     const timerElement = document.getElementById('timer');
+    const welcomeContainer = document.getElementById('welcomeContainer');
+    const quizApp = document.getElementById('quizApp');
     const timeLimit = 210 * 60;
     let timeRemaining = localStorage.getItem('timeRemaining') !== null ? parseInt(localStorage.getItem('timeRemaining'), 10) : timeLimit;
     let selectedAnswers = JSON.parse(localStorage.getItem('selectedAnswers')) || {};
@@ -79,6 +82,7 @@ document.addEventListener('DOMContentLoaded', function () {
         submitted = true;
         saveState();
         showResults();
+        exitFullScreen();
     }
 
     function showResults() {
@@ -232,7 +236,38 @@ document.addEventListener('DOMContentLoaded', function () {
         }
     }
 
+    startButton.addEventListener('click', () => {
+        welcomeContainer.style.display = 'none';
+        quizApp.style.display = 'block';
+        requestFullScreen();
+        loadQuizData();
+        updateTimer();
+    });
+
     submitButton.addEventListener('click', submitTest);
 
-    loadQuizData();
+    function requestFullScreen() {
+        const docElm = document.documentElement;
+        if (docElm.requestFullscreen) {
+            docElm.requestFullscreen().catch(err => console.log(`Error attempting to enable full-screen mode: ${err.message} (${err.name})`));
+        } else if (docElm.mozRequestFullScreen) {
+            docElm.mozRequestFullScreen().catch(err => console.log(`Error attempting to enable full-screen mode: ${err.message} (${err.name})`));
+        } else if (docElm.webkitRequestFullScreen) {
+            docElm.webkitRequestFullScreen().catch(err => console.log(`Error attempting to enable full-screen mode: ${err.message} (${err.name})`));
+        } else if (docElm.msRequestFullscreen) {
+            docElm.msRequestFullscreen().catch(err => console.log(`Error attempting to enable full-screen mode: ${err.message} (${err.name})`));
+        }
+    }
+
+    function exitFullScreen() {
+        if (document.exitFullscreen) {
+            document.exitFullscreen();
+        } else if (document.mozCancelFullScreen) {
+            document.mozCancelFullScreen();
+        } else if (document.webkitExitFullscreen) {
+            document.webkitExitFullscreen();
+        } else if (document.msExitFullscreen) {
+            document.msExitFullscreen();
+        }
+    }
 });
