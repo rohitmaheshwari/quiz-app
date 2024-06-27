@@ -1,0 +1,86 @@
+{
+    "Logical Reasoning": [
+        {
+            "question": "A box contains 20 balls: 6 red, 5 blue, 7 green, and 2 yellow. If two balls are drawn at random without replacement, what is the probability that both balls are red?",
+            "options": {
+                "a": "1/19",
+                "b": "3/38",
+                "c": "5/57",
+                "d": "1/38"
+            },
+            "answer": "b"
+        },
+        {
+            "question": "Iff it takes 5 machines 5 minutes to make 5 widgets, how long would it take 100 machines to make 100 widgets?",
+            "options": {
+                "a": "5 minutes",
+                "b": "10 minutes",
+                "c": "20 minutes",
+                "d": "100 minutes"
+            },
+            "answer": "a"
+        },
+        {
+            "question": "A man buys a horse for $60, sells it for $70, buys it back for $80, and sells it again for $90. What is his total profit?",
+            "options": {
+                "a": "$10",
+                "b": "$20",
+                "c": "$30",
+                "d": "$40"
+            },
+            "answer": "b"
+        },
+        {
+            "question": "A clock shows the time as 3:15. What is the angle between the hour and the minute hands?",
+            "options": {
+                "a": "0 degrees",
+                "b": "7.5 degrees",
+                "c": "15 degrees",
+                "d": "37.5 degrees"
+            },
+            "answer": "d"
+        }
+    ],
+    "Logical": [
+        {
+            "question": "A vbox contains 20 balls: 6 red, 5 blue, 7 green, and 2 yellow. If two balls are drawn at random without replacement, what is the probability that both balls are red?",
+            "options": {
+                "a": "1/19",
+                "b": "3/38",
+                "c": "5/57",
+                "d": "1/38"
+            },
+            "answer": "b"
+        },
+        {
+            "question": "Iff it takes 5 machines 5 minutes to make 5 widgets, how long would it take 100 machines to make 100 widgets?",
+            "options": {
+                "a": "5 minutes",
+                "b": "10 minutes",
+                "c": "20 minutes",
+                "d": "100 minutes"
+            },
+            "answer": "a"
+        },
+        {
+            "question": "A man buys a horse for $60, sells it for $70, buys it back for $80, and sells it again for $90. What is his total profit?",
+            "options": {
+                "a": "$10",
+                "b": "$20",
+                "c": "$30",
+                "d": "$40"
+            },
+            "answer": "b"
+        },
+        {
+            "question": "A clock shows the time as 3:15. What is the angle between the hour and the minute hands?",
+            "options": {
+                "a": "0 degrees",
+                "b": "7.5 degrees",
+                "c": "15 degrees",
+                "d": "37.5 degrees"
+            },
+            "answer": "d"
+        }
+    ]
+}
