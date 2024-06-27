@@ -13,6 +13,7 @@ document.addEventListener('DOMContentLoaded', function () {
     let submitted = JSON.parse(localStorage.getItem('submitted')) || false;
     let quizData = {};
     const quizDataHashKey = 'quizDataHash';
+    let timerInterval;
 
     function saveState() {
         localStorage.setItem('selectedAnswers', JSON.stringify(selectedAnswers));
@@ -60,9 +61,15 @@ document.addEventListener('DOMContentLoaded', function () {
         if (timeRemaining > 0) {
             timeRemaining--;
             saveState();
-            setTimeout(updateTimer, 1000);
         } else {
+            clearInterval(timerInterval);
             submitTest();
+        }
+    }
+
+    function startTimer() {
+        if (!timerInterval) {
+            timerInterval = setInterval(updateTimer, 1000);
         }
     }
 
@@ -229,7 +236,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 showResults();
             } else {
                 loadQuestions(subjectSelect.value);
-                updateTimer();
+                startTimer();
             }
         } catch (error) {
             console.error('Error loading quiz data:', error);
@@ -241,7 +248,7 @@ document.addEventListener('DOMContentLoaded', function () {
         quizApp.style.display = 'block';
         requestFullScreen();
         loadQuizData();
-        updateTimer();
+        startTimer();
     });
 
     submitButton.addEventListener('click', submitTest);
