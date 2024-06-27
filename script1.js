@@ -68,20 +68,31 @@ document.addEventListener('DOMContentLoaded', function () {
             showResults();
             return;
         }
-        const currentSubject = subjectSelect.value;
-        const questions = quizData[currentSubject];
-        const allAnswered = questions.every((question, index) => selectedAnswers[currentSubject] && selectedAnswers[currentSubject][index] !== undefined);
+
+        // Check all subjects for completeness
+        let allAnswered = true;
+        for (const subject in quizData) {
+            const questions = quizData[subject];
+            const subjectAnswered = questions.every((question, index) => selectedAnswers[subject] && selectedAnswers[subject][index] !== undefined);
+            if (!subjectAnswered) {
+                allAnswered = false;
+                break;
+            }
+        }
+
         if (!allAnswered) {
-            alert("Please answer all questions before submitting.");
+            alert("Please answer all questions in all subjects before submitting.");
             return;
         }
+
         submitted = true;
         saveState();
         showResults();
     }
 
     function showResults() {
-        quizContainer.innerHTML = '';
+        quizContainer.style.display = 'none';
+        resultContainer.style.display = 'block';
         resultContainer.innerHTML = '';
         let totalScore = 0;
         let totalQuestions = 0;
@@ -108,7 +119,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 questionResultDiv.classList.add('question-result');
                 questionResultDiv.innerHTML = `
                     <p>Q${index + 1}: ${question.question}</p>
-                    <p>Your Answer: ${userAnswer ? `${userAnswer}. ${question.options[userAnswer]}` : 'No answer'}</p>
+                    <p>Your Answer: ${userAnswer ? userAnswer : 'No answer'}</p>
                     <p>${resultText}</p>
                 `;
                 subjectContentDiv.appendChild(questionResultDiv);
@@ -157,8 +168,8 @@ document.addEventListener('DOMContentLoaded', function () {
             resultText += `Subject: ${subject}\n\n`;
             questions.forEach((question, index) => {
                 const correct = selectedAnswers[subject] && selectedAnswers[subject][index] === question.answer;
-                const answerText = correct ? "Correct" : `Incorrect (Correct: ${question.answer}. ${question.options[question.answer]})`;
-                resultText += `Q${index + 1}: ${question.question}\nYour Answer: ${selectedAnswers[subject][index] ? `${selectedAnswers[subject][index]}. ${question.options[selectedAnswers[subject][index]]}` : 'No answer'}\n${answerText}\n\n`;
+                const answerText = correct ? "Correct" : `Incorrect (Correct: ${question.answer})`;
+                resultText += `Q${index + 1}: ${question.question}\nYour Answer: ${selectedAnswers[subject][index]}\n${answerText}\n\n`;
                 if (correct) {
                     subjectScore++;
                 }
@@ -179,12 +190,11 @@ document.addEventListener('DOMContentLoaded', function () {
         document.body.removeChild(a);
     }
 
-    async function hashQuizData(data) {
-        const jsonStr = JSON.stringify(data);
-        const hashBuffer = new TextEncoder().encode(jsonStr);
-        const hashArray = await crypto.subtle.digest('SHA-256', hashBuffer);
-        const hashHex = Array.from(new Uint8Array(hashArray)).map(b => b.toString(16).padStart(2, '0')).join('');
-        return hashHex;
+    function hashQuizData(data) {
+        return JSON.stringify(data).split('').reduce((a, b) => {
+            a = ((a << 5) - a) + b.charCodeAt(0);
+            return a & a;
+        }, 0);
     }
 
     function resetStateIfDataChanged(newDataHash) {
@@ -200,34 +210,33 @@ document.addEventListener('DOMContentLoaded', function () {
         }
     }
 
-    async function loadQuizData() {
-        try {
-            const response = await fetch('quiz_data.json');
-            const data = await response.json();
-            const newDataHash = await hashQuizData(data);
-            resetStateIfDataChanged(newDataHash);
-            quizData = data;
-            for (const subject in quizData) {
-                const option = document.createElement('option');
-                option.value = subject;
-                option.textContent = subject;
-                subjectSelect.appendChild(option);
-            }
-            subjectSelect.addEventListener('change', () => {
-                if (!submitted) {
-                    loadQuestions(subjectSelect.value);
+    function loadQuizData() {
+        fetch('quiz_data.json')
+            .then(response => response.json())
+            .then(data => {
+                const newDataHash = hashQuizData(data).toString();
+                resetStateIfDataChanged(newDataHash);
+                quizData = data;
+                for (const subject in quizData) {
+                    const option = document.createElement('option');
+                    option.value = subject;
+                    option.textContent = subject;
+                    subjectSelect.appendChild(option);
                 }
-            });
-            subjectSelect.value = Object.keys(quizData)[0];
-            if (submitted) {
-                showResults();
-            } else {
-                loadQuestions(subjectSelect.value);
-                updateTimer();
-            }
-        } catch (error) {
-            console.error('Error loading quiz data:', error);
-        }
+                subjectSelect.addEventListener('change', () => {
+                    if (!submitted) {
+                        loadQuestions(subjectSelect.value);
+                    }
+                });
+                subjectSelect.value = Object.keys(quizData)[0];
+                if (submitted) {
+                    showResults();
+                } else {
+                    loadQuestions(subjectSelect.value);
+                    updateTimer();
+                }
+            })
+            .catch(error => console.error('Error loading quiz data:', error));
     }
 
     submitButton.addEventListener('click', submitTest);

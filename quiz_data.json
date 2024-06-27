@@ -1,86 +1,96 @@
 {
     "Logical Reasoning": [
         {
-            "question": "A box contains 20 balls: 6 red, 5 blue, 7 green, and 2 yellow. If two balls are drawn at random without replacement, what is the probability that both balls are red?",
+            "question": "A group of fri mends are sitting in a row. Alex is to the left of Bob. Carol is to the right of David and to the left of Alex. Who is sitting in the middle if there are five friends?",
             "options": {
-                "a": "1/19",
-                "b": "3/38",
-                "c": "5/57",
-                "d": "1/38"
+                "a": "Alex",
+                "b": "Bob",
+                "c": "Carol",
+                "d": "David"
             },
             "answer": "b"
         },
         {
-            "question": "Iff it takes 5 machines 5 minutes to make 5 widgets, how long would it take 100 machines to make 100 widgets?",
+            "question": "In a certain code, 'MANGO' is written as '41647' and 'APPLE' is written as '65523'. How is 'ORANGE' written in that code?",
             "options": {
-                "a": "5 minutes",
-                "b": "10 minutes",
-                "c": "20 minutes",
-                "d": "100 minutes"
+                "a": "748512",
+                "b": "748513",
+                "c": "748614",
+                "d": "748615"
             },
             "answer": "a"
         },
         {
-            "question": "A man buys a horse for $60, sells it for $70, buys it back for $80, and sells it again for $90. What is his total profit?",
+            "question": "A clock shows the time as 5:30. What is the angle between the hour and the minute hands?",
             "options": {
-                "a": "$10",
-                "b": "$20",
-                "c": "$30",
-                "d": "$40"
+                "a": "0 degrees",
+                "b": "15 degrees",
+                "c": "30 degrees",
+                "d": "45 degrees"
+            },
+            "answer": "d"
+        },
+        {
+            "question": "Five houses are built in a row. The red house is to the left of the blue house, and the green house is to the right of the yellow house. The white house is not adjacent to the green house. Which house is in the middle?",
+            "options": {
+                "a": "Red",
+                "b": "Blue",
+                "c": "Green",
+                "d": "Yellow"
             },
             "answer": "b"
         },
         {
-            "question": "A clock shows the time as 3:15. What is the angle between the hour and the minute hands?",
+            "question": "If in a certain language, 'TREE' is coded as 'VUGG', how would 'LEAF' be coded?",
             "options": {
-                "a": "0 degrees",
-                "b": "7.5 degrees",
-                "c": "15 degrees",
-                "d": "37.5 degrees"
+                "a": "NGCG",
+                "b": "NFCG",
+                "c": "NFFG",
+                "d": "NFCH"
             },
-            "answer": "d"
+            "answer": "c"
         }
     ],
-    "Logical": [
+    "test": [
         {
-            "question": "A vbox contains 20 balls: 6 red, 5 blue, 7 green, and 2 yellow. If two balls are drawn at random without replacement, what is the probability that both balls are red?",
+            "question": "A group of fri mends are sitting in a row. Alex is to the left of Bob. Carol is to the right of David and to the left of Alex. Who is sitting in the middle if there are five friends?",
             "options": {
-                "a": "1/19",
-                "b": "3/38",
-                "c": "5/57",
-                "d": "1/38"
+                "a": "Alex",
+                "b": "Bob",
+                "c": "Carol",
+                "d": "David"
             },
             "answer": "b"
         },
         {
-            "question": "Iff it takes 5 machines 5 minutes to make 5 widgets, how long would it take 100 machines to make 100 widgets?",
+            "question": "In a certain code, 'MANGO' is written as '41647' and 'APPLE' is written as '65523'. How is 'ORANGE' written in that code?",
             "options": {
-                "a": "5 minutes",
-                "b": "10 minutes",
-                "c": "20 minutes",
-                "d": "100 minutes"
+                "a": "748512",
+                "b": "748513",
+                "c": "748614",
+                "d": "748615"
             },
             "answer": "a"
         },
         {
-            "question": "A man buys a horse for $60, sells it for $70, buys it back for $80, and sells it again for $90. What is his total profit?",
-            "options": {
-                "a": "$10",
-                "b": "$20",
-                "c": "$30",
-                "d": "$40"
-            },
-            "answer": "b"
-        },
-        {
-            "question": "A clock shows the time as 3:15. What is the angle between the hour and the minute hands?",
+            "question": "A clock shows the time as 5:30. What is the angle between the hour and the minute hands?",
             "options": {
                 "a": "0 degrees",
-                "b": "7.5 degrees",
-                "c": "15 degrees",
-                "d": "37.5 degrees"
+                "b": "15 degrees",
+                "c": "30 degrees",
+                "d": "45 degrees"
             },
             "answer": "d"
+        },
+        {
+            "question": "Five houses are built in a row. The red house is to the left of the blue house, and the green house is to the right of the yellow house. The white house is not adjacent to the green house. Which house is in the middle?",
+            "options": {
+                "a": "Red",
+                "b": "Blue",
+                "c": "Green",
+                "d": "Yellow"
+            },
+            "answer": "b"
         }
     ]
 }
